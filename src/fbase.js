@@ -1,4 +1,5 @@
-import * as firebase  from "firebase/app";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 // const firebaseConfig = {
 //     apiKey: "AIzaSyDp9GT0qb9mMCUZVMYTUDGODOw2JbeOqEk",
@@ -20,4 +21,7 @@ const firebaseConfig = {
 };
 
 
-export default firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
+
+export const auth = getAuth();
+// 한번 호출하고 필요한부분에서 import 하여 쓴다
