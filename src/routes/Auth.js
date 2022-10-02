@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { authService } from "fbase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [newAccount, setNewAccount] = useState(true);
+
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -13,9 +17,28 @@ const Auth = () => {
       setPassword(value);
     }
   };
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     // 내가 control을 하겠다. defaul 는 모두 refresh됨
+    try {
+      let data;
+      if (newAccount) {
+        data = await createUserWithEmailAndPassword(
+          authService,
+          email,
+          password
+        );
+      } else {
+        data = await signInWithEmailAndPassword(
+          authService,
+          email,
+          password);
+      }
+      console.log(data);
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
   };
   return (
     <div>
@@ -36,7 +59,7 @@ const Auth = () => {
           value={password}
           onChange={onChange}
         />
-        <input type="submit" value="Log In" />
+        <input type="submit" value={newAccount ? "Create Account" : "Log In"} />
       </form>
       <div>
         <button>Continue with Google</button>

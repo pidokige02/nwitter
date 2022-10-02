@@ -21,7 +21,7 @@ const firebaseConfig = {
 };
 
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth();
+export const authService = getAuth(app);
 // 한번 호출하고 필요한부분에서 import 하여 쓴다
