@@ -15,13 +15,14 @@ const Auth = () => {
   };
   const onSubmit = (event) => {
     event.preventDefault();
+    // 내가 control을 하겠다. defaul 는 모두 refresh됨
   };
   return (
     <div>
       <form onSubmit={onSubmit}>
         <input
           name="email"
-          type="text"
+          type="email"
           placeholder="Email"
           required
           value={email}
